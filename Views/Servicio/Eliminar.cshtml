@@ -1,0 +1,54 @@
+﻿@model SistemaGestionCitas.Models.Servicio
+
+@{
+    ViewData["Title"] = "Eliminar Servicio";
+}
+
+<h2 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Eliminar Servicio</h2>
+
+<div class="alert alert-warning mt-4">
+    <i class="fas fa-info-circle"></i> ¿Está seguro que desea eliminar este servicio?
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Nombre:</dt>
+            <dd class="col-sm-9">@Model.Nombre</dd>
+
+            <dt class="col-sm-3">Descripción:</dt>
+            <dd class="col-sm-9">@Model.Descripcion</dd>
+
+            <dt class="col-sm-3">Duración (min):</dt>
+            <dd class="col-sm-9">@Model.DuracionMinutos</dd>
+
+            <dt class="col-sm-3">Costo:</dt>
+            <dd class="col-sm-9">@Model.Costo.ToString("C")</dd>
+
+            <dt class="col-sm-3">Estado:</dt>
+            <dd class="col-sm-9">
+                @if (Model.Activo)
+                {
+                    <span class="badge bg-success">Activo</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Inactivo</span>
+                }
+            </dd>
+        </dl>
+
+        <form asp-action="Eliminar" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

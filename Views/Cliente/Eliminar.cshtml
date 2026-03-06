@@ -1,0 +1,41 @@
+﻿@model SistemaGestionCitas.Models.Cliente
+
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+
+<h2 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Eliminar Cliente</h2>
+
+<div class="alert alert-warning mt-4">
+    <i class="fas fa-info-circle"></i> ¿Está seguro que desea eliminar este cliente?
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Identificación:</dt>
+            <dd class="col-sm-9">@Model.Identificacion</dd>
+
+            <dt class="col-sm-3">Nombre Completo:</dt>
+            <dd class="col-sm-9">@Model.NombreCompleto</dd>
+
+            <dt class="col-sm-3">Teléfono:</dt>
+            <dd class="col-sm-9">@Model.Telefono</dd>
+
+            <dt class="col-sm-3">Correo:</dt>
+            <dd class="col-sm-9">@Model.Correo</dd>
+        </dl>
+
+        <form asp-action="Eliminar" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <button type="submit" class="btn btn-danger"
+                    onclick="return confirm('¿Confirma eliminar este cliente?');">
+                <i class="fas fa-trash"></i> Eliminar
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Cancelar
+            </a>
+        </form>
+    </div>
+</div>

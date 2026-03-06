@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@if (TempData["Exito"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show"
+         style="border-radius:12px; border-left: 4px solid #5ecba1;">
+        <i class="fas fa-check-circle"></i> @TempData["Exito"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="text-center mb-4">
+    <h2><i class="fas fa-chart-line"></i> Dashboard</h2>
+    <p>Bienvenido, <strong>@ViewBag.UsuarioNombre</strong></p>
+    <p>
+        Rol:
+        @if (ViewBag.UsuarioRol == "Administrador")
+        {
+            <span class="badge bg-danger">Administrador</span>
+        }
+        else
+        {
+            <span class="badge" style="background-color: #7c6fe0;">Usuario</span>
+        }
+    </p>
+</div>
+
+<!-- Tarjetas principales -->
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card text-white h-100" style="background-color: #7c6fe0;">
+            <div class="card-body text-center py-4">
+                <i class="fas fa-users fa-3x mb-3"></i>
+                <h5 class="card-title">Clientes</h5>
+                <p class="display-4 fw-bold">@ViewBag.TotalClientes</p>
+                <a asp-controller="Cliente" asp-action="Index" class="btn btn-light btn-sm">
+                    <i class="fas fa-arrow-right"></i> Ver Clientes
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white h-100" style="background-color: #5ecba1;">
+            <div class="card-body text-center py-4">
+                <i class="fas fa-briefcase fa-3x mb-3"></i>
+                <h5 class="card-title">Servicios</h5>
+                <p class="display-4 fw-bold">@ViewBag.TotalServicios</p>
+                <a asp-controller="Servicio" asp-action="Index" class="btn btn-light btn-sm">
+                    <i class="fas fa-arrow-right"></i> Ver Servicios
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white h-100" style="background-color: #f0a0c0;">
+            <div class="card-body text-center py-4">
+                <i class="fas fa-calendar-alt fa-3x mb-3"></i>
+                <h5 class="card-title">Citas</h5>
+                <p class="display-4 fw-bold">0</p>
+                <small class="text-white"><i class="fas fa-clock"></i> Próximamente</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estadísticas detalladas -->
+<div class="row g-4 mt-2">
+    <div class="col-md-6">
+        <div class="card h-100" style="border: 1.5px solid #e0d9ff;">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3" style="color: #5a4fcf;">
+                    <i class="fas fa-chart-bar"></i> Resumen de Servicios
+                </h6>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>Servicios Activos</span>
+                    <span class="badge bg-success px-3 py-2 fs-6">@ViewBag.TotalServiciosActivos</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>Servicios Inactivos</span>
+                    <span class="badge bg-danger px-3 py-2 fs-6">@ViewBag.TotalServiciosInactivos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100" style="border: 1.5px solid #e0d9ff;">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3" style="color: #5a4fcf;">
+                    <i class="fas fa-bolt"></i> Acciones Rápidas
+                </h6>
+                <div class="d-flex flex-column gap-2">
+                    <a asp-controller="Cliente" asp-action="Crear"
+                       class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-user-plus"></i> Nuevo Cliente
+                    </a>
+                    @if (ViewBag.UsuarioRol == "Administrador")
+                    {
+                        <a asp-controller="Servicio" asp-action="Crear"
+                           class="btn btn-sm btn-outline-success">
+                            <i class="fas fa-plus"></i> Nuevo Servicio
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert mt-4" style="background-color: #f0eeff; color: #5a4fcf; border-left: 4px solid #7c6fe0;">
+    <i class="fas fa-info-circle"></i>
+    <strong>Nota:</strong> El módulo de citas estará disponible en la segunda defensa.
+</div>
